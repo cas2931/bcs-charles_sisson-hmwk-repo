@@ -1,8 +1,10 @@
+// Variables & Arrays
 var inputLength 
 var confirmNumber 
 var confirmSpecAscii
 var confirmUpperCase 
 var confirmLowerCase 
+var pwCriteria
 
 var number ="1234567890".split("")
 var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
@@ -43,8 +45,43 @@ function generatePassword() {
     confirmLowerCase= confirm("Will your password contain lowercase letters?");
   }; 
   // If all the confirm options are false/negative
-  else if (!confirmNumber && !confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
-    selections= alert("At least one option must be chosen!")
+  if (!confirmNumber && !confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
+    pwCriteria= alert("At least one option must be chosen!");
+  } 
+  // If ALL the confirm options are chosen
+  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria= number.concat(specAscii,upperCase,lowerCase);
+  }
+  // If only three confirm options are chosen
+  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && !confirmLowerCase) {
+    pwCriteria= number.concat(specAscii,upperCase);
+  }
+  else if (confirmNumber && confirmSpecAscii && !confirmUpperCase && confirmLowerCase) {
+    pwCriteria= number.concat(specAscii,lowerCase);
+  }
+  else if (confirmNumber && !confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria= number.concat(upperCase,lowerCase);
+  } 
+  else if (!confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria= specAscii.concat(upperCase,lowerCase);
+  } 
+  // If only two confirm options are chosen
+  else if (confirmNumber && confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
+    pwCriteria = number.concat(specAscii);
+  }
+  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria = ;
+  }
+  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria = ;
+  }
+  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria =;
+  }
+  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria = ;
+  }
+   else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria = ;
   }
 }
-
