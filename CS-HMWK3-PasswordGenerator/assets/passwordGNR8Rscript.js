@@ -69,19 +69,32 @@ function generatePassword() {
   else if (confirmNumber && confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
     pwCriteria = number.concat(specAscii);
   }
-  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
-    pwCriteria = ;
+  else if (confirmNumber && !confirmSpecAscii && confirmUpperCase && !confirmLowerCase) {
+    pwCriteria = number.concat(upperCase);
   }
-  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
-    pwCriteria = ;
+  else if (!confirmNumber && confirmSpecAscii && confirmUpperCase && !confirmLowerCase) {
+    pwCriteria = specAscii.concat(upperCase);
   }
-  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
-    pwCriteria =;
+  else if (!confirmNumber && confirmSpecAscii && !confirmUpperCase && confirmLowerCase) {
+    pwCriteria =specAscii.concat(lowerCase);
   }
-  else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
-    pwCriteria = ;
+  else if (!confirmNumber && !confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
+    pwCriteria = upperCase.concat(lowerCase);
   }
-   else if (confirmNumber && confirmSpecAscii && confirmUpperCase && confirmLowerCase) {
-    pwCriteria = ;
+   else if (confirmNumber && !confirmSpecAscii && !confirmUpperCase && confirmLowerCase) {
+    pwCriteria = number.concat(lowerCase);
+  }
+  // If only one option is chosen
+  else if (confirmNumber && !confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
+    pwCriteria = number;
+  } 
+  else if (!confirmNumber && confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
+    pwCriteria = specAscii;
+  } 
+  else if (!confirmNumber && !confirmSpecAscii && confirmUpperCase && !confirmLowerCase) {
+    pwCriteria = upperCase;
+  } 
+  else if (!confirmNumber && !confirmSpecAscii && !confirmUpperCase && confirmLowerCase) {
+    pwCriteria = lowerCase;
   }
 }
