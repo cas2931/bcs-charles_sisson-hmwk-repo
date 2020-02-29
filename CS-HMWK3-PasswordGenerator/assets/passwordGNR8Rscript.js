@@ -11,18 +11,14 @@ var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
 var lowerCase = "abcdefghijklmnopqrstuvwxyz".split("") 
 var specAscii = "!#$%&()*+,-./:;<=>?@[\]^_{|}~".split("")
 
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-}
+var generateBtn = document.querySelector("#generate"); 
+var passwordText = document.querySelector("#password");
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword); 
+generateBtn.addEventListener("click", function () {
+  var password = generatePassword(); 
+  passwordText.textContent = password;
+});
 
 function generatePassword() {
 
@@ -96,9 +92,20 @@ function generatePassword() {
   } 
   else if (!confirmNumber && !confirmSpecAscii && !confirmUpperCase && confirmLowerCase) {
     pwCriteria = lowerCase;
-  };
-// Random selection for all variables 
-  for (var i = 0; i > input; i++) {
-    var inputChoices= pwCriteria [Math.floor(Math.random() * input.length)]
-  }
+  }; 
+  
+  // pal is an array placeholder for input generated amount of length
+  var pal = [];
+  // Random selection for all variables 
+  for (var i = 0; i < input; i++) {
+    var inputChoices = pwCriteria [Math.floor(Math.random() * pwCriteria.length)];
+      pal.push(inputChoices); 
+      }
+    var password= pal.join("");
+    writePassword(password);
+    return password;
+  
+function writePassword (pal) {
+
+}
 }
