@@ -1,5 +1,5 @@
 // Variables & Arrays
-var inputLength 
+var input 
 var confirmNumber 
 var confirmSpecAscii
 var confirmUpperCase 
@@ -27,14 +27,14 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
 
 // Initial prompt for password length
-  inputLength= prompt("Please choose a length between 8 and 128 characters for your password");
+  input= prompt("Please choose a length between 8 and 128 characters for your password");
 
 // If no value entered
-  if (!inputLength) {
+  if (!input) {
     alert("Value needed");
   }
   // Check if password length valid
-  else if (inputLength < 8 || inputLength > 128) {
+  else if (input < 8 || input > 128) {
     prompt("Please choose between 8 and 128");
   }  
   // Confirm specific password characters
@@ -96,5 +96,9 @@ function generatePassword() {
   } 
   else if (!confirmNumber && !confirmSpecAscii && !confirmUpperCase && confirmLowerCase) {
     pwCriteria = lowerCase;
+  };
+// Random selection for all variables 
+  for (var i = 0; i > input; i++) {
+    var inputChoices= pwCriteria [Math.floor(Math.random() * input.length)]
   }
 }
