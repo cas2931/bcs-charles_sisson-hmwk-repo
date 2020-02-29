@@ -4,10 +4,10 @@ var confirmSpecAscii
 var confirmUpperCase 
 var confirmLowerCase 
 
-var number = ["1234567890"] 
-var upperCase = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"] 
-var lowerCase = ["abcdefghijklmnopqrstuvwxyz"] 
-var specAscii = ["!#$%&()*+,-./:;<=>?@[\]^_{|}~"]
+var number ="1234567890".split("")
+var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
+var lowerCase = "abcdefghijklmnopqrstuvwxyz".split("") 
+var specAscii = "!#$%&()*+,-./:;<=>?@[\]^_{|}~".split("")
 
 var generateBtn = document.querySelector("#generate");
 
@@ -41,5 +41,10 @@ function generatePassword() {
     confirmSpecAscii= confirm("Will you password contain special characters?"); 
     confirmUpperCase= confirm("Will your password contain uppercase letters?");
     confirmLowerCase= confirm("Will your password contain lowercase letters?");
+  }; 
+  // If all the confirm options are false/negative
+  else if (!confirmNumber && !confirmSpecAscii && !confirmUpperCase && !confirmLowerCase) {
+    selections= alert("At least one option must be chosen!")
   }
 }
+
