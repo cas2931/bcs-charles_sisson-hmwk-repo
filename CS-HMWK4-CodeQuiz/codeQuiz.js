@@ -1,43 +1,42 @@
-// Welcome div Elements 
+// Home div 
 var welcomeEl = document.querySelector("#welcome");
 var startButton = document.querySelector("#startQuiz");
 
-//Quiz Page Elements 
+// Quiz div 
 var quizEl = document.querySelector("#quiz");
-var questionEl = document.querySelector("#question");
-var answersEl = document.querySelector("#answers");
+var questionDisplay = document.querySelector("#question");
+var answersDisplay = document.querySelector("#answers");
 
-//Input Score Page Elements 
+// Initials & score div  
 var inputScoreEl = document.querySelector("#inputScore");
 var initialsEl = document.querySelector("#initials");
-var submitInitialsBtnEl = document.querySelector("#submitInitials");
+var submit_initialsButton= document.querySelector("#submitInitials");
 var userScoreEl = document.querySelector("#score");
 
-//View High Scores Page Elements 
+// High scores div
 var highScoresEl = document.querySelector("#highScores");
 var scoresEl = document.querySelector("#scores");
-var goBackBtnEl = document.querySelector("#goBack");
-var clearScoresBtnEl = document.querySelector("#clearScores");
+var go_backButton = document.querySelector("#goBack");
+var clear_scoresButton = document.querySelector("#clearScores");
 
-//Universal vars
-var viewHScoresBtnEl = document.querySelector("#viewHScores");
-var timerEl = document.querySelector("#timer");
+var high_scores_viewButton = document.querySelector("#viewHScores");
+var quizTimer = document.querySelector("#timer");
 var score = 0;
-var currentQ = 0;
+var currentQuestion = 0;
 var highScores = [];
 var interval;
-var timeGiven = 100;
+var timeGiven = 80;
 var secondsElapsed = 0;
 
 // Question Array
-var questions = [
+var questionSet = [
   {
-      title: "In relation to information technology, what does API stand for?",
-      choices: ["academic performance index",
+    title: "In relation to information technology, what does API stand for?",
+    choices: ["academic performance index",
                 "alphabet phonetique international",
                 "application programming interface",
                 "advance passenger information"],
-      answer: "application programming interface"
+    answer: "application programming interface"
   },
   {
     title: "Which built-in method removes the last element from an array and returns that element?",
@@ -45,35 +44,45 @@ var questions = [
     answer: "pop()"
   },
   {
-      title: "Which API would allow a user to provide their current whereabouts to a web application?",
-      choices: ["geocity", "geolocation", "geospot", "geodestination"],
-      answer: "geolocation"
+    title: "Which API would allow a user to provide their current whereabouts to a web application?",
+    choices: ["geocity", "geolocation", "geospot", "geodestination"],
+    answer: "geolocation"
   },
   {
-      title: "Which built-in method returns the calling string value converted to lower case?",
-      choices: ["toLowerCase()", "toLower()", "changeCase(case)", "None of the Above"],
-      answer: "toLowerCase()"
+    title: "Which built-in method returns the calling string value converted to lower case?",
+    choices: ["toLowerCase()", "toLower()", "changeCase(case)", "None of the Above"],
+    answer: "toLowerCase()"
+  }, 
+  {
+    title: "Which is a popular JavaScript library designed to simplify HTML DOM tree traversal & manipulation, event handling, CSS animation, and Ajax.",
+    choices: ["JAsk", "JQuiz", "JQuery", "JInquire"] , 
+    answer: "Jquery" 
   },
   {
-      title: "Which of the following function of Number object returns the number's value",
-      choices: ["toString()", "valueOf()", "toLocaleString()", "toPrecision()"],
-      answer: "valueOf()"
+    title: "Which of the following function of Number object returns the number's value?",
+    choices: ["toString()", "valueOf()", "toLocaleString()", "toPrecision()"],
+    answer: "valueOf()"
+  }, 
+  {
+    title: "Which of the following isn't a method to schedule a JavaScript function call?",
+    choices: ["setInterval", "setAwatchman","setTimeout","None of the above"],
+    answer: "setAwatchman"
   },
   {
-      title: "Which of the following function of Array object joins all elements of an array into a string?",
-      choices: ["concat()", "join()", "pop()", "map()"],
-      answer: "join()"
+    title: "Which of the following function of Array object joins all elements of an array into a string?",
+    choices: ["concat()", "join()", "pop()", "map()"],
+    answer: "join()"
   }
 ];
 
 // Start timer f(x)
 function startTimer() {
-    timerEl.textContent = timeGiven;
+    quizTimer.textContent = timeGiven;
     interval = setInterval(function () {
         secondsElapsed++;
-        timerEl.textContent = timeGiven - secondsElapsed;
+        quizTimer.textContent = timeGiven - secondsElapsed;
         if (secondsElapsed >= timeGiven) {
-            currentQ = questions.length;
+            currentQuestion = questionSet.length;
             nextQuestion();
         }
     }, 1000);
@@ -85,10 +94,9 @@ function stopTimer() {
 }
 
 //Clears current question and calls for display of next question
-//Calls for input score display if last question
 function nextQuestion() {
-    currentQ++;
-    if (currentQ < questions.length) {
+    currentQuestion++;
+    if (currentQuestion < questionSet.length) {
         renderQuestion();
     } else {
         stopTimer();
@@ -97,7 +105,7 @@ function nextQuestion() {
         userScoreEl.textContent = score;
         hide(quizEl);
         show(inputScoreEl);
-        timerEl.textContent = 0;
+        quizTimer.textContent = 0;
     }
 }
 
@@ -105,7 +113,7 @@ function nextQuestion() {
 function checkAnswer(answer) {
     var answerIndex = answer.id - 1;
 
-    if (questions[currentQ].answer == questions[currentQ].choices[answerIndex]) {
+    if (questionSet[currentQuestion].answer == questionSet[currentQuestion].choices[answerIndex]) {
         score += 5;
         displayMessage("Correct!");
     }
@@ -135,32 +143,29 @@ function displayMessage(m) {
 
 }
 
-//hides element
+//hides a div when needed
 function hide(element) {
     element.style.display = "none";
 }
 
-//displays element
+//displays a div when needed
 function show(element) {
     element.style.display = "block";
-
 }
 
-//reset local variables
+//reset f(x)
 function reset() {
     score = 0;
-    currentQ = 0;
+    currentQuestion = 0;
     secondsElapsed = 0;
-    timerEl.textContent = 0;
+    quizTimer.textContent = 0;
 }
-
-//=================== Rendering ================================
 
 //Renders current question
 function renderQuestion() {
-    questionEl.textContent = questions[currentQ].title;
-    for (i = 0; i < answersEl.children.length; i++) {
-        answersEl.children[i].children[0].textContent = (i + 1) + ": " + questions[currentQ].choices[i];
+    questionDisplay.textContent = questionSet[currentQuestion].title;
+    for (i = 0; i < answersDisplay.children.length; i++) {
+        answersDisplay.children[i].children[0].textContent = (i + 1) + ": " + questionSet[currentQuestion].choices[i];
     }
 }
 
@@ -181,7 +186,7 @@ function renderHighScores() {
 }
 
 //displays high scores
-viewHScoresBtnEl.addEventListener("click", function () {
+high_scores_viewButton.addEventListener("click", function () {
     hide(welcomeEl);
     hide(quizEl);
     hide(inputScoreEl);
@@ -190,7 +195,7 @@ viewHScoresBtnEl.addEventListener("click", function () {
     reset();
 });
 
-//starts quiz from  Welcome page
+//starts quiz from Welcome page
 startButton.addEventListener("click", function () {
     hide(welcomeEl);
     startTimer();
@@ -199,7 +204,7 @@ startButton.addEventListener("click", function () {
 });
 
 //Calls to check answer selected and calls to next question if button is clicked
-answersEl.addEventListener("click", function (e) {
+answersDisplay.addEventListener("click", function (e) {
     if (e.target.matches("button")) {
         checkAnswer(e.target);
         nextQuestion();
@@ -208,7 +213,7 @@ answersEl.addEventListener("click", function (e) {
 
 //Creates a user score object to push to the local storage scores array calls to display high scores
 //calls to render high scores
-submitInitialsBtnEl.addEventListener("click", function () {
+submit_initialsButton.addEventListener("click", function () {
     var initValue = initialsEl.value.trim();
     if (initValue) {
         var userScore = { username: initValue, userScore: score };
@@ -225,13 +230,13 @@ submitInitialsBtnEl.addEventListener("click", function () {
 });
 
 //Goes back to Welcome page from High scores 
-goBackBtnEl.addEventListener("click", function () {
+go_backButton.addEventListener("click", function () {
     hide(highScoresEl);
     show(welcomeEl);
 });
 
-//Clears saved scores from local storage
-clearScoresBtnEl.addEventListener("click", function () {
+//Clear saved scores from local storage
+clear_scoresButton.addEventListener("click", function () {
     highScores = [];
     localStorage.setItem("scores", JSON.stringify(highScores));
     renderHighScores();
