@@ -2,27 +2,26 @@
 <html>
 
 <head>
-
   <meta charset="utf-8">
   <title>CS Day Planner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
 </head>
 
 <body>
-    <!--"Header" div [Shows welcome spiel & current date & time-(get via moment.js)]-->
-    <div class="navbar fixed-top navbar-light bg-success">
-        <h1 id="navbar-title" style="text-align: center">Work Day Scheduler</h1> 
-        <h2 id="curent-date-holder" style="text-align: center"></h2>
+    <!--"Header" div [Shows title & current date & time-(get via moment.js)]-->
+    <div class="navbar justify-content-center fixed-top navbar-light bg-danger"> 
+      <div class="header-text">
+        <h1 id="navbar-title">Work Day Planner</h1> 
+        <h2 id="current-date-holder"></h2>
+      </div>
     </div> 
 
-    <!--form div, where the timetable will reside-->
-    <form id="plannerForm">
-        <div class="container" id = "timeTable">
-        </div>
-    </form>
+    <!--table div, where the timetable will reside-->
+    <table id="timeTable">
+
+    </table>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
