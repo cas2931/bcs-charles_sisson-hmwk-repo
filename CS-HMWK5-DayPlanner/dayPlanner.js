@@ -4,7 +4,7 @@ $(document).ready(function() {
     const rightNow= moment().format('MMMM Do YYYY, h:mm a');    // moment.js
 
     var dateDisplay= $("#current-date-holder");
-    dateDisplay.text(rightNow);
+    dateDisplay.text(rightNow); 
 })
 
 // Container div variable
@@ -51,6 +51,7 @@ eventCol.addClass('col-md-8');
 
 // Event input 
 var eventInput = $('<input>');
+eventInput.attr('class', 'dailyPlan')
 
 // Event column & input amalgam. Attach to plannerRow
 plannerRow.append(eventCol);
@@ -62,7 +63,8 @@ saveCol.addClass('col-md-2')
 
 // Save button
 var saveButton = $('<button>');  
-saveButton.text("💾")
+saveButton.text("💾") 
+saveButton.attr('class', 'saveMe')
 
 // Save column & button amalgam. Attach to plannerRow 
 plannerRow.append(saveCol)
@@ -85,3 +87,6 @@ function adjustRowColour(){
     eventCol.css("background-color","red")
     } 
 }
+// Save button f(x)
+// saveButton.on("click", function(event){
+//     event.preventDefault(); 
