@@ -1,0 +1,7 @@
+The fifth homework assignment of the BCS. Using skills and concepts gleaned in the fifth section of the course, including but not limited to jQuery, moment.js, and various API's; the task at hand was to create a simple day planner app. 
+The app is essentially an interactive time table, containing a row respresenting each hour of the timeframe of 9:00 AM to 5:00 PM, and within each row there are to be three columns, the left one display a specific hour in the aforementioned timeframe, a central column into which an event, note, or similiar input can be entered, and the right column holding the equivalent of a save button.
+A separate time display of the current time relative to the user, a "master clock" if you will, provided by the moment.js library is to be located somewhere adjacent to the timetable. 
+This master clock is to act as the keystone of certain aspects concerning the appearance and functionality of the app. 
+To represent the passing of time and instill a sense of urgency to what events may reside in the central input area, if a given rows time is concurrent with the master clock, that row is to be colored a neutral grey.
+If a row's time precedes the time on the master clock, that row is to be colored green. If a row's time has suceeded the time of the master clock, the row is to be colored red. 
+Using the save button element of the right column of a given row, said element is clicked, then it would allow input in the central events column to be saved in local storage to be called upon at a later time.
