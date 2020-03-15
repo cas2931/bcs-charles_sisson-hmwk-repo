@@ -1,61 +1,87 @@
-$( document ).ready(function() {
+$(document).ready(function() {
 
 // Set & display current "moment" (date & time) on top of page
     const rightNow= moment().format('MMMM Do YYYY, h:mm a');    // moment.js
 
- //console.log(rightNow);
-    var dateDisplay=$("#current-date-holder");
+    var dateDisplay= $("#current-date-holder");
     dateDisplay.text(rightNow);
+})
 
-// // working hours "array"/set for timetable rows
-// for (var workHour= 9; workHour <= 17; workHour++) {
-// let index = workHour - 9; 
-// // So there'll be nine hours, or rows, in the timetable bwtn 9AM & 5PM. The index will start at 9
-// }
+// Container div variable
+var plannerContainer = $('#plannerHolder'); 
 
-// 
-var plannerContainer = $('#timeTable');
+// To contain columns & rows of planner
+var timeTable = $('#timeTable');
 
-// Planner row [Contains Time, Event, and Save elements]
+// Array of work hours
+   var workHours = [
+     "9:00 AM", 
+     "10:00 AM", 
+     "11:00 AM", 
+     "12:00 PM", 
+     "1:00 PM", 
+     "2:00 PM", 
+     "3:00 PM", 
+     "4:00 PM", 
+     "5:00 PM"
+ ]; 
+
+ for (i = 0; i < workHours.length; i++) {
+
+// // Planner row [To contain Time, Event, and Save elements/columns]
 var plannerRow= $('<div>');
 plannerRow.addClass('row')
 
-// Time column
+// Time column [Contains time display from workHours array]
 var timeCol = $('<div>'); 
 timeCol.addClass('col-md-2');  
 
 // Time display
 var timeDisplay = $('<span>');
-timeCol.append(timeDisplay)
+timeDisplay.attr('class','timeBox')
+timeDisplay.text(workHour[i]);
 
 // Time column & display amalgam. Attach to plannerRow
-plannerRow.append(timeCol)
+plannerRow.append(timeCol);
+timeCol.append(timeDisplay);
 
-// Event column
+// Event column [Contains inputed event(s) from user]
 var eventCol = $('<div>'); 
 eventCol.addClass('col-md-8'); 
 
 // Event input 
 var eventInput = $('<input>');
-eventCol.append(eventInput) 
 
 // Event column & input amalgam. Attach to plannerRow
-plannerRow.append(eventCol)
+plannerRow.append(eventCol);
+eventCol.append(eventInput); 
 
-// Save column
+// Save column [Contains save button]
 var saveCol = $('<div>'); 
 saveCol.addClass('col-md-2') 
 
 // Save button
-var saveButton = $('<p>💾</p>'); 
-saveCol.append(saveButton)
+var saveButton = $('<button>');  
+saveButton.text("💾")
 
 // Save column & button amalgam. Attach to plannerRow 
-plannerRow.append(saveCol) 
-
-// Attach plannerRow w/ summative Time, Event, & Save elements to plannerContainer
-plannerContainer.append(plannerRow);
-});
+plannerRow.append(saveCol)
+saveCol.append(saveButton)
 
 
+// Attach plannerRow w/ summative Time, Event, & Save elements to timeTable div
+timeTable.append(plannerRow);
+ } 
 
+// Change row colour f(x) depending on current time (rightNow)
+function adjustRowColour(){
+    if (timeDisplay == rightNow) {
+    eventCol.css("background-color","grey")
+
+    } else if (timeDisplay > rightNow) {
+     eventCol.css("background-color","green")
+   
+    } else if (timeDisplay < rightNow) {
+    eventCol.css("background-color","red")
+    } 
+}
