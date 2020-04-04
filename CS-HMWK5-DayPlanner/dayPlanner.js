@@ -1,10 +1,11 @@
 $(document).ready(function() {
 
 // Set & display current "moment" (date & time) on top of page
-    const rightNow= moment().format('MMMM Do YYYY, h:mm a');    // moment.js
-
+    let currentDate = moment().format('MMMM Do YYYY, h:mm a');    // moment.js
+    let currentTime = moment().format('LT');
+    
     var dateDisplay= $("#current-date-holder");
-    dateDisplay.text(rightNow); 
+    dateDisplay.text(currentDate);  
 })
 
 // Container div variable
@@ -39,7 +40,7 @@ timeCol.addClass('col-md-2');
 // Time display
 var timeDisplay = $('<span>');
 timeDisplay.attr('class','timeBox')
-timeDisplay.text(workHour[i]);
+timeDisplay.text(workHours[i]);
 
 // Time column & display amalgam. Attach to plannerRow
 plannerRow.append(timeCol);
@@ -75,18 +76,18 @@ saveCol.append(saveButton)
 timeTable.append(plannerRow);
  } 
 
-// Change row colour f(x) depending on current time (rightNow)
+// Change row colour f(x) depending on current time (currentTime)
 function adjustRowColour(){
-    if (timeDisplay == rightNow) {
-    eventCol.css("background-color","grey")
+    if (timeDisplay.text == currentTime) {
+        $('col-md-8').css("background-color","#d3d3d3")
 
-    } else if (timeDisplay > rightNow) {
-     eventCol.css("background-color","green")
+    } else if (timeDisplay.text > currentTime) {
+        $('col-md-8').css("background-color","#008000")
    
-    } else if (timeDisplay < rightNow) {
-    eventCol.css("background-color","red")
+    } else if (timeDisplay.text < currentTime) 
+        $('col-md-8').css("background-color","#ff0000")
     } 
-}
+
 // Save button f(x)
 // saveButton.on("click", function(event){
 //     event.preventDefault(); 
