@@ -1,7 +1,11 @@
 // Modules to be used
 var inquirer = require('inquirer'); 
-var fs = require('fs');
+var fs = require('fs'); 
+var axios = require('axios'); 
+var ghApi = require ('./utils/api.js'); 
+var gnr8MD = require ('./utils/generateMarkdown.js')
 
+// Prompt/questions and answers to be used for the GitHub API call(s) and populate readme.md
 inquirer
   .prompt([
     {
@@ -31,7 +35,7 @@ inquirer
       },   
       {
         type: "editor",
-        message: "What steps are required to install your project:",
+        message: "What would be some uses for your project:",
         name: "usage"
       },   
       {
@@ -50,8 +54,9 @@ inquirer
         name: "tests"
       },   
   ])
+
   .then(answers => {
-     //cleaconsole.log(answers.description)
+    //console.log(answers)
   })
   .catch(error => {
     if(error.isTtyError) {
