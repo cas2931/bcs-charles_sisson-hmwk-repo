@@ -27,31 +27,78 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
 
-inquirer 
-.prompt([ 
-    {
+function employeeInquire() {
+  let employeeQuestions = [{
     type: 'input', 
     name: 'name',
-    message: "PLease enter your name"
+    message: "Please enter your name"
     }, 
     {
     type: 'input', 
     name: 'id',
-    message: "PLease enter your id number"
+    message: "Please enter your id number"
     },
     {
     type: 'input', 
     name: 'email',
     message: "PLease enter your email"
-    },
-  ])
-  .then(answers => {
-    // Use user feedback for... whatever!!
-  })
-  .catch(error => {
-    if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else when wrong
-    }
-  });
+    }, 
+    {
+    type:'list',
+    message: 'Please choose your role', 
+    choices: ['Manager','Engineer','Intern'],
+    name:'role'
+    }]; 
+
+    return inquirer
+      .prompt(employeeQuestions);
+  } 
+  //employeeInquire() 
+  function managerInquire() {
+     let managerQuestions = [{
+      type:'input', 
+      name: 'officeNumber',
+      message:'Please enter your office number'
+    }] 
+
+    return inquirer
+      .prompt(managerQuestions);
+  } 
+  //managerInquire()
+function engineerInquire() {
+  let engineerQuestions = [{
+    type: 'input',
+    name: 'github', 
+    message: 'Please enter your GitHub username'
+  }]
+
+    return inquirer 
+      .prompt(engineerQuestions);
+}
+
+function internInquire() {
+  let internQuestions = [{
+    type: 'input',
+    name: 'school',
+    message: 'Please enter your school'
+  }]
+    return inquirer 
+      .prompt(internQuestions);
+
+}
+
+async function run () {
+  let teamArray = [];
+  const maxRoster = 5; 
+  for (i = 0, i < maxRoster; i++;) {
+    let promise = new Promise(function(resolve, reject) {
+      employeeInquire() 
+      .then(function({ name, id, email, role }) {
+
+  if (role === 'Manager') {
+    managerInquire().then(function(officeNumber) {
+      this.employee = new Manager(name, id, email, officeNumber); 
+      //console.log(officeNumber);
+      teamArray.push(employee);
+      resolve("done");
+  
