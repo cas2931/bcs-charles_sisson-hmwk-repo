@@ -26,9 +26,12 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an 
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
+const employeeArray = [] 
 
-function employeeInquire() {
-  let employeeQuestions = [{
+async function employeeInquire() {
+  let employeeQuestions = 
+  await inquirer.prompt ([
+    {
     type: 'input', 
     name: 'name',
     message: "Please enter your name"
@@ -47,58 +50,73 @@ function employeeInquire() {
     type:'list',
     message: 'Please choose your role', 
     choices: ['Manager','Engineer','Intern'],
-    name:'role'
-    }]; 
+    name:'role' 
+    }
+  ]);  
 
-    return inquirer
-      .prompt(employeeQuestions);
-  } 
-  //employeeInquire() 
-  function managerInquire() {
-     let managerQuestions = [{
+  switch(employeeQuestions.role) {
+    case "Manager":
+      employeeQuestions = await managerInquire(employeeQuestions);
+    break;
+    case "Engineer":
+      employeeQuestions = await engineerInquire(employeeQuestions);
+    break;
+    case "Intern":
+      employeeQuestions = await internInquire(employeeQuestions);
+    break; 
+    default: 
+    break;
+  }
+return employeeQuestions 
+} 
+
+  async function managerInquire(employeeQuestions) {
+     let managerQuestions = 
+     await inquirer.prompt ([
+    {
       type:'input', 
       name: 'officeNumber',
       message:'Please enter your office number'
-    }] 
+     }
+    ]);
 
-    return inquirer
-      .prompt(managerQuestions);
-  } 
-  //managerInquire()
-function engineerInquire() {
-  let engineerQuestions = [{
+employeeQuestions.officeNumber = await managerQuestions.officeNumber; 
+
+return employeeQuestions   
+  }  
+
+  async function engineerInquire(employeeQuestions) {
+    let engineerQuestions = 
+    await inquirer.prompt ([
+    {
     type: 'input',
     name: 'github', 
     message: 'Please enter your GitHub username'
-  }]
+  }
+]); 
 
-    return inquirer 
-      .prompt(engineerQuestions);
-}
+employeeQuestions.github = await engineerQuestions.github;
 
-function internInquire() {
-  let internQuestions = [{
+return employeeQuestions
+  }  
+
+async function internInquire(employeeQuestions) {
+  let internQuestions = 
+  await inquirer.prompt ([
+    {
     type: 'input',
     name: 'school',
     message: 'Please enter your school'
-  }]
-    return inquirer 
-      .prompt(internQuestions);
+    }
+  ]);
+    
+employeeQuestions.school = await internQuestions.school;
+
+return employeeQuestions
+}  
+
+function addEmployee (employeeQuestions) {
 
 }
 
-async function run () {
-  let teamArray = [];
-  const maxRoster = 5; 
-  for (i = 0, i < maxRoster; i++;) {
-    let promise = new Promise(function(resolve, reject) {
-      employeeInquire() 
-      .then(function({ name, id, email, role }) {
-
-  if (role === 'Manager') {
-    managerInquire().then(function(officeNumber) {
-      this.employee = new Manager(name, id, email, officeNumber); 
-      //console.log(officeNumber);
-      teamArray.push(employee);
-      resolve("done");
-  
+//employeeInquire()
