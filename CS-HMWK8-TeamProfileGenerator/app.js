@@ -27,6 +27,7 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
 const employeeArray = [] 
+const teamCapacity = 6 
 
 async function employeeInquire() {
   let employeeQuestions = 
@@ -82,7 +83,7 @@ return employeeQuestions
 
 employeeQuestions.officeNumber = await managerQuestions.officeNumber; 
 
-return employeeQuestions   
+return employeeQuestions 
   }  
 
   async function engineerInquire(employeeQuestions) {
@@ -115,8 +116,27 @@ employeeQuestions.school = await internQuestions.school;
 return employeeQuestions
 }  
 
-function addEmployee (employeeQuestions) {
-
+function createEmployee (employeeQuestions) {
+  let employee; 
+  const {name, id, email} = employeeQuestions;
+  switch(employeeQuestions.role) {
+    case "Manager":
+      const manager = new Manager (name, id, email, employeeQuestions.officeNumber); 
+      employee = manager; 
+      break;
+    case "Engineer":
+      const engineer = new Engineer (name, id, email, employeeQuestions.github);
+      employee = engineer; 
+      break; 
+    case "Intern": 
+      const intern = new Intern (name, id,email, employeeQuestions.school); 
+      employee = intern; 
+      break;
+    default:
+      break;
+} 
+return employee
 }
 
-//employeeInquire()
+employeeInquire();
+
